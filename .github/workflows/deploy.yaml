@@ -28,7 +28,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: nimboya/sample_html:{{ github.run_id }}
+          tags: nimboya/sample_html:${{ github.run_id }}
       
       - name: Inject KubeConfig
         uses: azure/k8s-set-context@v4
