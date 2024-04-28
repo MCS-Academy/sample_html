@@ -16,6 +16,7 @@ jobs:
         run: echo "Helloo World"
 
   build:
+    needs: [ test ]
     runs-on: ubuntu-latest
     steps:
       - name: Code Checkout
@@ -40,7 +41,7 @@ jobs:
           tags: nimboya/sample_html:${{ github.run_id }}
   
   deploy:
-    needs: [ build ]
+    needs: [ test, build ]
     runs-on: ubuntu-latest
     steps:
       - name: Code Checkout
