@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: samplehtml
+spec:
+  selector:
+    matchLabels:
+      app: samplehtml
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: samplehtml
+    spec:
+      containers:
+      - name: samplehtml
+        image: nimboya/sample_html
+        ports:
+        - containerPort: 80
