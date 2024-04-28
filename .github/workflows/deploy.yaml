@@ -14,9 +14,26 @@ jobs:
       
       - name: Run Test
         run: echo "Helloo World"
+  testone:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v3
+      
+      - name: Run Test
+        run: echo "Helloo World"
+  
+  testtwo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v3
+      
+      - name: Run Test
+        run: echo "Helloo World"
 
   build:
-    needs: [ test ]
+    needs: [ test, testone, testtwo ]
     runs-on: ubuntu-latest
     steps:
       - name: Code Checkout
