@@ -38,12 +38,13 @@ jobs:
         with:
           push: true
           tags: nimboya/sample_html:${{ github.run_id }}
+  
   deploy:
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
        - name: Code Checkout
-        uses: actions/checkout@v3
+         uses: actions/checkout@v3
 
       - name: Inject KubeConfig
         uses: azure/k8s-set-context@v4
