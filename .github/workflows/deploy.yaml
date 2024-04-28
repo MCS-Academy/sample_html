@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build-push-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Code Checkout
@@ -29,14 +29,17 @@ jobs:
         with:
           push: true
           tags: nimboya/sample_html:${{ github.run_id }}
-      
+  deploy:
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    steps:
       - name: Inject KubeConfig
         uses: azure/k8s-set-context@v4
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBE_CONFIG }}
           context: lke171196-ctx
-      
+
       - name: Install Kubectl
         run: |
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
