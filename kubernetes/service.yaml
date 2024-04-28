@@ -11,3 +11,9 @@ spec:
       port: 80
       targetPort: 80
   type: LoadBalancer
+
+
+  kubectl
+          mkdir .kube
+          touch .kube/config
+          echo ${{ secrets.KUBE_CONFIG }} > .kube/config

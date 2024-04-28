@@ -30,12 +30,21 @@ jobs:
           push: true
           tags: nimboya/sample_html:latest
       
-      - name: Install Kubectl
-        run: |
-          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-          chmod +x kubectl
-          mv ./kubectl /usr/local/bin/
-          kubectl
+      - name: Inject KubeConfig
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+          context: default
+      
+      # - name: Install Kubectl
+      #   run: |
+      #     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+      #     chmod +x kubectl
+      #     mv ./kubectl /usr/local/bin/
 
+      # - name: Deploy to Kubernetes
+      #   run: |
+      #     kubectl apply -f /kubernetes
       
 
